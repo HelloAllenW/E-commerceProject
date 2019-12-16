@@ -1,6 +1,7 @@
 package com.mmall.pojo;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Category {
     private Integer id;
@@ -85,5 +86,22 @@ public class Category {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+
+    // 重写 Category 的 hashCode和 equals方法（递归需要）
+    // ALT+Insert键 调出Generate -> equals and hashCode -> 只比较id
+    // equals 取多个元素进行比较，hashCode只取id进行比较
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(id, category.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
